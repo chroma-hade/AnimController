@@ -2,7 +2,7 @@
 **[Important]:** Change location of 'Animations' Folder on code!
 
 #### Type?
-- There have "Play", "Stop", "Speed" to manage animation track!
+- There have "Play", "Stop", "Speed" type to manage animation track!
 #### Name?
 - The animation name on animation folder!
 #### Value?
