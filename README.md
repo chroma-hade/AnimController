@@ -45,5 +45,4 @@ if not IsActionPlaying then
 else
 	warn("Bam! some action priority animation are playing!")
 end
--- []
 ```
