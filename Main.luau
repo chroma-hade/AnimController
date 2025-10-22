@@ -1,7 +1,7 @@
 local AnimController = {}
 
 local ReplicatedStorage = game:GetService("ReplicatedStorage")
-local Animations = ReplicatedStorage:WaitForChild("Animations")
+local Animations = ReplicatedStorage:WaitForChild("Animations") -- change this if it need to be change.
 
 local AnimationStore = {}
 
