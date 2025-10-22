@@ -12,7 +12,7 @@
 #### Overwrite?
 - Stop all playing animation from **'AnimController'** and play selected animation!
 
-Example is down blow.
+Example is down below.
 
 ```luau
 local AnimController = require("ModuleLocation")
