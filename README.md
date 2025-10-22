@@ -26,7 +26,7 @@ local Track : AnimationTrack = AnimController.Control(Animator, {
 	["Overwrite"] = true, -- Stop all playing animation on AnimController
 })
 
--- [ Check is Animation are Playing ]
+-- [ Check is Animation are Playing ] --
 -- you can add more names for multiple check!
 -- like {"Idle", "Eating", "Lying"}
 local IsDancePlaying = AnimController.IsThesePlaying(Animator, {"Dance"})
