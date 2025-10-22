@@ -1,11 +1,11 @@
 local AnimController = {}
 
 local ReplicatedStorage = game:GetService("ReplicatedStorage")
-local Animations = ReplicatedStorage:WaitForChild("Animations") -- change this if it need to be change.
+local Animations = ReplicatedStorage:WaitForChild("Animations") -- change here if it need to change.
 
 local AnimationStore = {}
 
-type AnimTrack = {
+type TrackData = {
 	["Time"] : number,
 	["Track"] : AnimationTrack,
 }
@@ -69,8 +69,8 @@ end
 local function AdjustType(Data : TypeData)
 	local Type = Data["Type"]
 
-	local TrackData = Data["TrackData"]
-	local SyncData = Data["SyncData"]
+	local TrackData : TrackData = Data["TrackData"]
+	local SyncData : TrackData = Data["SyncData"]
 
 	local MainTrack : AnimationTrack = TrackData["Track"]
 	local SyncTrack : AnimationTrack = SyncData and SyncData["Track"]
@@ -93,8 +93,8 @@ local function AdjustType(Data : TypeData)
 end
 
 local function ControlAnimation(Animator : Animator, Data : ControlData)
-	local TrackData : AnimTrack = GetTrackFromName(Animator, Data["Name"])
-	local SyncData : AnimTrack = GetTrackFromName(Animator, Data["TimeSync"] or "")
+	local TrackData : TrackData = GetTrackFromName(Animator, Data["Name"])
+	local SyncData : TrackData = GetTrackFromName(Animator, Data["TimeSync"] or "")
 	if TrackData then
 		if Data["Overwrite"] then
 			StopAllAnimations(Animator, Data["Value"])
