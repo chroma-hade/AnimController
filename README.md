@@ -15,6 +15,7 @@
 Example is down below.
 
 ```luau
+-- [ Basic Usage ]
 local AnimController = require("ModuleLocation")
 
 local Track : AnimationTrack = AnimController.Control(Animator, {
@@ -24,4 +25,22 @@ local Track : AnimationTrack = AnimController.Control(Animator, {
 	["Reset"] = true, -- For no sync timeposition.
 	["Overwrite"] = true, -- Stop all playing animation on AnimController
 })
+
+-- [ Check is animation playing ]
+-- you can add more names for multiple check! (like {"Idle", "Eating", "Lying"})
+local IsDancePlaying = AnimController.IsThesePlaying(Animator, {"Dance"})
+if IsDancePlaying then -- check is that animation playing
+	print("Playing!")
+else
+	warn("Not Dancing!")
+end
+
+-- Check is animator playing any "Action" (include 2~4) priority animation
+local IsActionPlaying = AnimController.IsActionPlaying(Animator)
+if not IsActionPlaying then
+	-- Do stuff
+else
+	warn("Bam! some action priority animation are playing!")
+end
+-- []
 ```
