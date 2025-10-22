@@ -33,7 +33,7 @@ like {"Idle", "Eating", "Lying"}
 ]]
 local IsDancePlaying = AnimController.IsThesePlaying(Animator, {"Dance"})
 if IsDancePlaying then -- check is that animation playing
-	print("Playing!")
+	print("Animation is Playing!")
 else
 	warn("Not Dancing!")
 end
