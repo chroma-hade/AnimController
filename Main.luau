@@ -1,16 +1,9 @@
 local AnimController = {}
 
 local ReplicatedStorage = game:GetService("ReplicatedStorage")
-local Animations = ReplicatedStorage:WaitForChild("Animations")
+local Animations = ReplicatedStorage:WaitForChild("Animations") -- Change Location if it need to be change.
 
 local AnimationStore = {}
-
-local ActionList = {
-	[Enum.AnimationPriority.Action] = true,
-	[Enum.AnimationPriority.Action2] = true,
-	[Enum.AnimationPriority.Action3] = true,
-	[Enum.AnimationPriority.Action4] = true,
-}
 
 type TrackData = {
 	["Time"] : number,
