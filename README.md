@@ -43,6 +43,6 @@ local IsActionPlaying = AnimController.IsActionPlaying(Animator)
 if not IsActionPlaying then
 	-- Do stuff
 else
-	warn("Bam! some action priority animation are playing!")
+	warn("Bam! some high priority animation are playing!")
 end
 ```
