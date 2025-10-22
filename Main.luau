@@ -1,9 +1,16 @@
 local AnimController = {}
 
 local ReplicatedStorage = game:GetService("ReplicatedStorage")
-local Animations = ReplicatedStorage:WaitForChild("Animations") -- change here if it need to change.
+local Animations = ReplicatedStorage:WaitForChild("Animations")
 
 local AnimationStore = {}
+
+local ActionList = {
+	[Enum.AnimationPriority.Action] = true,
+	[Enum.AnimationPriority.Action2] = true,
+	[Enum.AnimationPriority.Action3] = true,
+	[Enum.AnimationPriority.Action4] = true,
+}
 
 type TrackData = {
 	["Time"] : number,
@@ -53,6 +60,39 @@ local function GetTrackFromName(Animator : Animator, Name : string)
 	end
 end
 
+local function FindSameName(Track : AnimationTrack, Names : {string})
+	for Index, Name in Names do
+		if Track.Name == Name and Track.IsPlaying then
+			return true
+		end
+	end
+end
+
+local function IsThesePlaying(Animator : Animator, Names : {string})
+	local Tracks = Animator:GetPlayingAnimationTracks()
+	local LocalStore = AnimationStore[Animator]
+	local IsPlaying = nil
+	if LocalStore then
+		for Index, Track : AnimationTrack in Tracks do
+			IsPlaying = not IsPlaying and FindSameName(Track, Names)
+		end
+		return IsPlaying
+	end
+end
+
+local function IsActionPlaying(Animator : Animator) : boolean
+	local Tracks = Animator:GetPlayingAnimationTracks()
+	local LocalStore = AnimationStore[Animator]
+	if LocalStore then
+		for Index, Track : AnimationTrack in Tracks do
+			local IsAction = string.find(Track.Priority.Name, "Action")
+			if LocalStore[Track.Name] and Track.IsPlaying and IsAction then
+				return true
+			end
+		end
+	end
+end
+
 local function StopAllAnimations(Animator : Animator, Value : number)
 	local Tracks = Animator:GetPlayingAnimationTracks()
 	for Index, Track : AnimationTrack in Tracks do
@@ -92,7 +132,7 @@ local function AdjustType(Data : TypeData)
 	end 
 end
 
-local function ControlAnimation(Animator : Animator, Data : ControlData)
+local function ControlAnimation(Animator : Animator, Data : ControlData) : AnimationTrack
 	local TrackData : TrackData = GetTrackFromName(Animator, Data["Name"])
 	local SyncData : TrackData = GetTrackFromName(Animator, Data["TimeSync"] or "")
 	if TrackData then
@@ -114,6 +154,10 @@ end
 
 AnimController.Control = ControlAnimation
 AnimController.GetAnimation = GetAnimationFromName
+
+AnimController.IsThesePlaying = IsThesePlaying
+AnimController.IsActionPlaying = IsActionPlaying
+
 AnimController.GetTrackFromName = GetTrackFromName
 AnimController.StopAllAnimations = StopAllAnimations
 
