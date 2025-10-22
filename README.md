@@ -39,7 +39,7 @@ end
 -- Check is animator playing any "Action" (include 2~4) priority animation
 local IsActionPlaying = AnimController.IsActionPlaying(Animator)
 if not IsActionPlaying then
-	-- Do stuff
+	print("[Idle Animation]: Can i join?")
 else
 	warn("Bam! some high priority animation are playing!")
 end
