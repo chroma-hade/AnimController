@@ -1,8 +1,5 @@
 local AnimController = {}
 
-local ReplicatedStorage = game:GetService("ReplicatedStorage")
-local Animations = ReplicatedStorage:WaitForChild("Animations") -- Change Location if it need to be change.
-
 local AnimationStore = {}
 
 type TrackData = {
@@ -12,7 +9,7 @@ type TrackData = {
 
 type ControlData = {
 	["Type"] : string,
-	["Name"] : string,
+	["Animation"] : Animation,
 	["Value"] : number,
 	["Reset"] : boolean,
 	["Overwrite"] : boolean,
@@ -25,30 +22,22 @@ type TypeData = {
 	["Value"] : number,
 }
 
-local function GetAnimationFromName(Name : string)
-	local Animation : Animation = Animations:FindFirstChild(Name, true)
-	if Animation and Animation:IsA("Animation") then
-		return Animation
-	end
-end
-
-local function GetTrackFromName(Animator : Animator, Name : string)
+local function GetTrack(Animator : Animator, Animation : Animation)
 	local Store = AnimationStore[Animator]
 	if not Store then
 		AnimationStore[Animator] = {}
 		Store = AnimationStore[Animator]
 	end
-	local TrackData = Store[Name]
+	local TrackData = Store[Animation]
 	if TrackData then
 		return TrackData
 	else
-		local Animation = GetAnimationFromName(Name)
-		if Animation then
+		if Animation and Animation:IsA("Animation") then
 			local Track : AnimationTrack = Animator:LoadAnimation(Animation)
-			Store[Name] = {}
-			Store[Name]["Time"] = 0
-			Store[Name]["Track"] = Track
-			return Store[Name]
+			Store[Animation] = {}
+			Store[Animation]["Time"] = 0
+			Store[Animation]["Track"] = Track
+			return Store[Animation]
 		end
 	end
 end
@@ -92,7 +81,7 @@ local function StopAllAnimations(Animator : Animator, Value : number)
 		AnimController.Control(Animator,
 			{
 				["Type"] = "Stop",
-				["Name"] = Track.Name,
+				["Animation"] = Track.Animation,
 				["Value"] = Value
 			}
 		)
@@ -120,14 +109,14 @@ local function AdjustType(Data : TypeData)
 		end
 	elseif Type == "Speed" then
 		MainTrack:AdjustSpeed(Data["Value"])
-	elseif Type == "SetSync" then
+	elseif Type == "SetSync" then  
 		MainTrack.TimePosition = SyncTrack["Time"]
 	end 
 end
 
 local function ControlAnimation(Animator : Animator, Data : ControlData) : AnimationTrack
-	local TrackData : TrackData = GetTrackFromName(Animator, Data["Name"])
-	local SyncData : TrackData = GetTrackFromName(Animator, Data["TimeSync"] or "")
+	local TrackData : TrackData = GetTrack(Animator, Data["Animation"])
+	local SyncData : TrackData = GetTrack(Animator, Data["TimeSync"])
 	if TrackData then
 		if Data["Overwrite"] then
 			StopAllAnimations(Animator, Data["Value"])
@@ -146,12 +135,11 @@ local function ControlAnimation(Animator : Animator, Data : ControlData) : Anima
 end
 
 AnimController.Control = ControlAnimation
-AnimController.GetAnimation = GetAnimationFromName
 
 AnimController.IsThesePlaying = IsThesePlaying
 AnimController.IsActionPlaying = IsActionPlaying
 
-AnimController.GetTrackFromName = GetTrackFromName
+AnimController.GetTrack = GetTrack
 AnimController.StopAllAnimations = StopAllAnimations
 
 return AnimController
