@@ -26,9 +26,9 @@ local Track : AnimationTrack = AnimController.Control(Animator, {
 })
 
 -- [ Check is Animation are Playing ] --
+local IsDancePlaying = AnimController.IsThesePlaying(Animator, {"Dance"})
 -- you can add more names for multiple check!
 -- like {"Idle", "Eating", "Lying"}
-local IsDancePlaying = AnimController.IsThesePlaying(Animator, {"Dance"})
 if IsDancePlaying then -- check is that animation playing
 	print("Animation is Playing!")
 else
@@ -44,5 +44,6 @@ else
 end
 
 -- Stop All Animations
-AnimController.StopAllAnimations(Animator, Value) -- Value is "number" of fade time!
+AnimController.StopAllAnimations(Animator, Value)
+-- Value is "number" of fade time!
 ```
