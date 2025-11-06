@@ -45,5 +45,4 @@ end
 
 -- Stop All Animations
 AnimController.StopAllAnimations(Animator, Value) -- Value is "number" of fade time!
--- 
 ```
