@@ -19,7 +19,7 @@ local AnimController = require("ModuleLocation")
 
 local Track : AnimationTrack = AnimController.Control(Animator, {
 	["Type"] = "Play", -- (Play, Stop, Speed)
-	["Animation"] = PunchAnim, -- Animation Object!
+	["Animation"] = YourAnimation, -- Animation Object!
 	["Value"] = 0, -- Value for fade time (Play, Stop), and "Speed"
 	["Reset"] = true, -- For no loop/sync timeposition.
 	["Overwrite"] = true, -- Stop all playing animation on AnimController
