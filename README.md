@@ -1,10 +1,9 @@
 ## AnimController
-**[Important]:** Change location of 'Animations' Folder on code!
 
 #### Type?
 - There have "Play", "Stop", "Speed" type to manage animation track!
-#### Name?
-- The animation name on animation folder!
+#### Animation?
+- The "Animation" Object for control!
 #### Value?
 - The default roblox animation play/stop and adjustspeed value (number)
 #### Reset?
@@ -20,9 +19,9 @@ local AnimController = require("ModuleLocation")
 
 local Track : AnimationTrack = AnimController.Control(Animator, {
 	["Type"] = "Play", 
-	["Name"] = "Attack", -- Animation name!
+	["Animation"] = PunchAnim, -- Animation Object!
 	["Value"] = 0,
-	["Reset"] = true, -- For no sync timeposition.
+	["Reset"] = true, -- For no loop/sync timeposition.
 	["Overwrite"] = true, -- Stop all playing animation on AnimController
 })
 
@@ -43,4 +42,8 @@ if not IsActionPlaying then
 else
 	warn("Bam! some high priority animation are playing!")
 end
+
+-- Stop All Animations
+AnimController.StopAllAnimations(Animator, Value) -- Value is "number" of fade time!
+-- 
 ```
