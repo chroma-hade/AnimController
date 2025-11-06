@@ -35,7 +35,7 @@ else
 	warn("Not Dancing!")
 end
 
--- Check is animator playing any "Action" (include 2~4) priority animation
+-- Check is Animator Playing any "Action" (Include 2~4) Priority Animation
 local IsActionPlaying = AnimController.IsActionPlaying(Animator)
 if not IsActionPlaying then
 	print("[Idle Animation]: Can i join?")
@@ -45,5 +45,5 @@ end
 
 -- Stop All Animations
 AnimController.StopAllAnimations(Animator, Value)
--- Value is "number" of fade time!
+-- "Value" is "number" of fade time!
 ```
