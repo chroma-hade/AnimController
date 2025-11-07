@@ -135,11 +135,9 @@ local function ControlAnimation(Animator : Animator, Data : ControlData) : Anima
 end
 
 AnimController.Control = ControlAnimation
+AnimController.StopAllAnimations = StopAllAnimations
 
 AnimController.IsThesePlaying = IsThesePlaying
 AnimController.IsActionPlaying = IsActionPlaying
-
-AnimController.GetTrack = GetTrack
-AnimController.StopAllAnimations = StopAllAnimations
 
 return AnimController
