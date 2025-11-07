@@ -29,6 +29,7 @@ local Track : AnimationTrack = AnimController.Control(Animator, {
 local IsDancePlaying = AnimController.IsThesePlaying(Animator, {"Dance"})
 -- you can add more names for multiple check!
 -- like {"Idle", "Eating", "Run"}
+
 if IsDancePlaying then -- check is that animation playing
 	print("Animation is Playing!")
 else
