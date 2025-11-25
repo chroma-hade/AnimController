@@ -17,8 +17,8 @@ type ControlData = {
 
 type TypeData = {
 	["Type"] : string,
-	["TrackData"] : AnimTrack,
-	["SyncData"] : AnimTrack,
+	["TrackData"] : TrackData,
+	["SyncData"] : TrackData,
 	["Value"] : number,
 }
 
