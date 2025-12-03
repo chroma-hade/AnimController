@@ -57,6 +57,9 @@ local function IsThesePlaying(Animator : Animator, Names : {string})
 	if LocalStore then
 		for Index, Track : AnimationTrack in Tracks do
 			IsPlaying = not IsPlaying and FindSameName(Track, Names)
+			if IsPlaying then
+				return true
+			end
 		end
 		return IsPlaying
 	end
