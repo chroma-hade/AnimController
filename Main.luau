@@ -123,6 +123,7 @@ local function ControlAnimation(Animator : Animator, Data : ControlData) : Anima
 		end
 		if Data["Reset"] then
 			TrackData["Time"] = 0
+	        TrackData["Track"]:Stop()
 		end
 		AdjustType({
 			["Type"] = Data["Type"],
