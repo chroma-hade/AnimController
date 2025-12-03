@@ -61,7 +61,6 @@ local function IsThesePlaying(Animator : Animator, Names : {string})
 				return true
 			end
 		end
-		return IsPlaying
 	end
 end
 
